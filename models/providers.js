@@ -21,7 +21,8 @@ const objectSchema = {
     },
     url_web:{
         type: String
-        }
+        },
+  
     }
 
 // Crear el esquema

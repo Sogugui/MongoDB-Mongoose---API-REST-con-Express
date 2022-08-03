@@ -1,3 +1,5 @@
+const { ObjectId } = require('mongodb');
+
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
@@ -27,19 +29,38 @@ var url = "mongodb://localhost:27017/";
 //   });
 // });
 
+// MongoClient.connect(url, function(err, db) {
+//   if (err) throw err;
+//   var dbo = db.db("mydb");
+//   var myobj = [
+//     {
+//       "_id": "62b062cff3fa93bf9d66fa06",
+//       "company_name": "Teatro Marquina",
+//       "CIF": "B40236882",
+//       "address": "Calle de Prim 11",
+//       "url_web":"https://www.tortillasmarquina.com"
+//   }
+//   ];
+//   dbo.collection("providers").insertMany(myobj, function(err, res) {
+//     if (err) throw err;
+//     console.log("Number of documents inserted: " + res.insertedCount);
+//     db.close();
+//   });
+// });
+
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   var dbo = db.db("mydb");
   var myobj = [
     {
-      "_id": "62b062cff3fa93bf9d66fa06",
-      "company_name": "Teatro Marquina",
-      "CIF": "B40236882",
-      "address": "Calle de Prim 11",
-      "url_web":"https://www.tortillasmarquina.com"
-  }
+	    "_id": ObjectId('62b062cff3fa93bf9d66fa28'),
+	    "title": "Tortilla - Marquina",
+	    "price": 1.80,
+        "description":"La mejor tortilla de la zona en el Teatro Marquina",
+	    "provider": ObjectId('62b062cff3fa93bf9d66fa06')
+	}
   ];
-  dbo.collection("providers").insertMany(myobj, function(err, res) {
+  dbo.collection("products").insertMany(myobj, function(err, res) {
     if (err) throw err;
     console.log("Number of documents inserted: " + res.insertedCount);
     db.close();

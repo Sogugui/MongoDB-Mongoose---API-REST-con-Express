@@ -28,6 +28,20 @@ const getProducts = async (req, res) => {
         }
     }
 }
+//Retorna un objeto con los datos de todos los productos. Retorna un status 200.
+// Usar populate() para que traiga los datos del proveedor de cada producto.
+const getProductProvider = async (req, res) => {
+    try {
+        let product =  await Product.find({}).populate('Providers');
+        res.status(200).json(product);
+    }
+    catch (error) {
+        console.log(`ERROR: ${error.stack}`);
+        res.status(404).json({"message": "producto no encontrado"});
+    }
+
+}
+
 const createProduct = async (req, res) => {
     console.log("Esto es el consol.log de lo que introducimos por postman",req.body); // Objeto recibido de producto nuevo
     const newProduct = req.body; // {} nuevo producto a guardar

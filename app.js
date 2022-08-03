@@ -11,8 +11,8 @@ const whale = require('cowsay2/cows/whale');
 //Rutas de productos
 const productsRoutes= require("./routes/productsRoutes");
 const productsApiRoutes = require('./routes/productsApiRoutes');
-
 const entriesApiRoutes= require("./routes/entriesApiRoutes")
+const providersApiRoutes= require("./routes/providersApiRoutes")
 //Tus propios modulos
 const calc=require("./utils/calculator.js");
 const { render } = require('pug');
@@ -48,6 +48,7 @@ app.use("/products",productsRoutes)
 //API
 app.use("/api/products",productsApiRoutes)
 app.use("/api",entriesApiRoutes)
+app.use("/api/providers",providersApiRoutes)
 
 // WEB
 // http://localhost:3000/products GET

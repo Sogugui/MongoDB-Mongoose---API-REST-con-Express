@@ -19,19 +19,23 @@ const objectSchema = {
         type: String, 
         required: true 
     },
-    image:{
-        type: String,
-        validate: {
-            validator: function(url){
-               if(url.indexOf('.jpg') != -1 || url.indexOf('.png') != -1){ // ESTO ES PARA DECIR QUE SI ES JPG O PNG DEVUELVA TRUE
-                return true;
-               }else{
-                return false
-               }
-            }, 
-            message: "Porfa, sólo imágenes JPG o PNG"
-        }
-    },
+    // image:{
+    //     type: String,
+    //     validate: {
+    //         validator: function(url){
+    //            if(url.indexOf('.jpg') != -1 || url.indexOf('.png') != -1){ // ESTO ES PARA DECIR QUE SI ES JPG O PNG DEVUELVA TRUE
+    //             return true;
+    //            }else{
+    //             return false
+    //            }
+    //         }, 
+    //         message: "Porfa, sólo imágenes JPG o PNG"
+    //     }
+    // },
+    provider:{ type: Number, 
+        required: true,
+        unique: true
+   }
     
 };
 // Crear el esquema
@@ -41,13 +45,13 @@ const Product = mongoose.model('Product', productSchema);
 
 module.exports = Product;
 
-//insertar un producto
-// const p = new Product({
-//     id: 1,
-//     title: "Tortilla",
-//     price: 1.80,
-//     description: "Tortilla jugosa del teatro",
-//     image:"https://www.recetasderechupete.com/wp-content/uploads/2020/11/Tortilla-de-patatas-4-768x530.jpg"
-// });
+// insertar un producto
+const p = new Product({
+    "_id": ObjectId("62b062cff3fa93bf9d66fa28"),
+    "title": "Tortilla - Marquina",
+    "price": 1.80,
+    "description":"La mejor tortilla de la zona en el Teatro Marquina",
+    "provider": ObjectId("62b062cff3fa93bf9d66fa06")
+});
 
-// p.save(). then((data)=>console.log(data))
+p.save(). then((data)=>console.log(data))
