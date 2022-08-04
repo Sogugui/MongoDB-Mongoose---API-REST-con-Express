@@ -9,7 +9,7 @@ const providersApiRouter= express.Router();
 const checkApiKey = require('../middlewares/auth_API_KEY');
 //products API
 providersApiRouter.get('/:id?',providersApiController.getProviders);
-providersApiRouter.post('/',checkApiKey,providersApiController.createProvider);
+// providersApiRouter.post('/',checkApiKey,providersApiController.createProvider);
 
 
 module.exports= providersApiRouter;

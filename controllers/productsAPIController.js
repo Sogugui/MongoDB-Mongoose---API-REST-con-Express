@@ -4,27 +4,26 @@
 //(app.js) limpio.
 const Product= require('../models/products') //importo el archivo product de models
 const getProducts = async (req, res) => {
-    if (req.params.id) { //find by ID
+    if (req.params.id) { //FIND BY ID
         try {
-            let product =  await Product.find({id:req.params.id},'title price id -_id');// lo que esta entre comillas es para filtrar lo que quiero que me muestre
-            req.status(200).json(product);
-         
+            let product =  await Product.findOne({id:req.params.id},'title price id -_id')
+
+            res.status(200).json(product);
         }
         catch (error) {
-            console.log(`ERROR: ${error.stack}`);
-            res.status(404).json( {"message":"producto no encontrado"}); // lo ponemos aqui a esto para que si falla el fetch no me de timeout y me pinte el array vacio
-           //el .status(200) es para que me devuelva ese numero de codigo de que todo ha ido bien (200) o error(404)
+            console.log(`ERROR: ${error.stack}`)
+            res.status(404).json({"message": "producto no encontrado"});
         }
-    } else { //Find all
+    } else { //FIND ALL
         try {
-            let product= await Product.find({},'title price id -_id').sort('-id')//poner las llaves sin nada es que me busque todo y el .sort es para que me ordene los resultados segun la propiedad que yo le pase. el - delante del id indica que el orden sea descendente, si no lo pongo es ascendente
-            res.status(200).json({ product }); // Pinta datos en el pug
+            let products =  await Product.find({}, '-_id -__v')
+            .populate('provider', 'company_name _id')
+            res.status(200).json({products});
         }
         catch (error) {
-            console.log(`ERROR: ${error.stack}`);
-            let products=[];
-            res.status(404).json({"message":"producto no encontrado"});
-            
+            console.log(`ERROR: ${error.stack}`)
+            let products = []
+            res.status(404).json(error);
         }
     }
 }

@@ -32,10 +32,10 @@ const objectSchema = {
     //         message: "Porfa, sólo imágenes JPG o PNG"
     //     }
     // },
-    provider:{ type: Number, 
-        required: true,
-        unique: true
-   }
+    provider:[{
+     type: mongoose.Schema.Types.ObjectId,
+     ref:'Provider'
+   }]
     
 };
 // Crear el esquema
@@ -46,12 +46,12 @@ const Product = mongoose.model('Product', productSchema);
 module.exports = Product;
 
 // insertar un producto
-const p = new Product({
-    "_id": ObjectId("62b062cff3fa93bf9d66fa28"),
-    "title": "Tortilla - Marquina",
-    "price": 1.80,
-    "description":"La mejor tortilla de la zona en el Teatro Marquina",
-    "provider": ObjectId("62b062cff3fa93bf9d66fa06")
-});
+// const p = new Product({
+//     "_id": ObjectId("62b062cff3fa93bf9d66fa28"),
+//     "title": "Tortilla - Marquina",
+//     "price": 1.80,
+//     "description":"La mejor tortilla de la zona en el Teatro Marquina",
+//     "provider": ObjectId("62b062cff3fa93bf9d66fa06")
+// });
 
-p.save(). then((data)=>console.log(data))
+// p.save(). then((data)=>console.log(data))

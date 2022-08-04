@@ -26,8 +26,8 @@ const objectSchema = {
     }
 
 // Crear el esquema
-const providersSchema = mongoose.Schema(objectSchema);
+const providerSchema = mongoose.Schema(objectSchema);
 // Crear el modelo --> Colección
-const Provider = mongoose.model('Providers', providersSchema);
+const Provider = mongoose.model('Provider', providerSchema);
 
 module.exports = Provider;
